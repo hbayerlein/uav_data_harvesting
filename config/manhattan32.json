@@ -1,0 +1,83 @@
+{
+    "model_stats_params": {
+        "save_model": "models/manhattan32",
+        "moving_average_length": 50,
+        "log_file_name": "manhattan32",
+        "training_images": false
+    },
+    "grid_params": {
+        "movement_range": [
+            50,
+            150
+        ],
+        "map_path": "res/manhattan32.png",
+        "num_agents_range": [
+            1,
+            3
+        ],
+        "device_manager": {
+            "device_count_range": [
+                3,
+                10
+            ],
+            "data_range": [
+                5.0,
+                20.0
+            ],
+            "fixed_devices": false,
+            "devices": {
+                "position": [
+                    0,
+                    0
+                ],
+                "data": 15.0,
+                "color": "blue"
+            }
+        },
+        "multi_agent": true
+    },
+    "reward_params": {
+        "boundary_penalty": 1.0,
+        "empty_battery_penalty": 250.0,
+        "data_multiplier": 1.0,
+        "movement_penalty": 0.1
+    },
+    "trainer_params": {
+        "batch_size": 128,
+        "num_steps": 3e6,
+        "rm_pre_fill_ratio": 0.5,
+        "rm_pre_fill_random": true,
+        "eval_period": 5,
+        "rm_size": 50000,
+        "load_model": ""
+    },
+    "agent_params": {
+        "conv_layers": 2,
+        "conv_kernel_size": 5,
+        "conv_kernels": 16,
+        "hidden_layer_size": 256,
+        "hidden_layer_num": 3,
+        "learning_rate": 3e-05,
+        "rm_size": 50000,
+        "alpha": 0.005,
+        "gamma": 0.95,
+        "soft_max_scaling": 0.1,
+        "use_global_local": true,
+        "global_map_scaling": 3,
+        "local_map_size": 17,
+        "print_summary": true
+    },
+    "physics_params": {
+        "channel_params": {
+            "cell_edge_snr": -25,
+            "los_path_loss_exp": 2.27,
+            "nlos_path_loss_exp": 3.64,
+            "uav_altitude": 10.0,
+            "cell_size": 10.0,
+            "los_shadowing_variance": 2.0,
+            "nlos_shadowing_variance": 5.0,
+            "map_path": "res/manhattan32.png"
+        },
+        "comm_steps": 4
+    }
+}
