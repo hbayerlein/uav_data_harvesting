@@ -9,7 +9,7 @@
 
 ## Introduction
 
-This repository contains an implementation of the double deep Q-learning (DDQN) approach to control multiple UAVs on a data harvesting from IoT sensors mission, including dual global-local map processing. The corresponding paper "Multi-UAV Path Planning for Wireless Data Harvesting with Deep Reinforcement Learning" INSERT LINK is available on arXiv.
+This repository contains an implementation of the double deep Q-learning (DDQN) approach to control multiple UAVs on a data harvesting from IoT sensors mission, including dual global-local map processing. The corresponding paper ["Multi-UAV Path Planning for Wireless Data Harvesting with Deep Reinforcement Learning"](https://arxiv.org/abs/2010.12461) is available on arXiv.
 
 An earlier single-UAV conference version ["UAV Path Planning for Wireless Data Harvesting: A Deep Reinforcement Learning Approach"](https://arxiv.org/abs/2007.00544) is also available on arXiv and is to be presented at IEEE Globecom 2020.
 
@@ -74,15 +74,15 @@ The shadowing maps, defining for each position and each IoT device whether there
 
 If using this code for research purposes, please cite:
 
-[1] H. Bayerlein, M. Theile, M. Caccamo, and D. Gesbert, “Multi-UAV path planning for wireless data harvesting with deep reinforcement learning," arXiv:INSERT link, 2020. 
+[1] H. Bayerlein, M. Theile, M. Caccamo, and D. Gesbert, “Multi-UAV path planning for wireless data harvesting with deep reinforcement learning," arXiv:2010.12461 [cs.MA], 2020. 
 
 ```
 @article{Bayerlein2020,
         author  = {Harald Bayerlein and Mirco Theile and Marco Caccamo and David Gesbert},
         title   = {Multi-{UAV} Path Planning for Wireless Data Harvesting with Deep Reinforcement Learning},
-        journal = {arXiv:},
+        journal = {arXiv:2010.12461 [cs.MA]},
         year    = {2020},
-        url     = {https://arxiv.org/abs/INSERT},
+        url     = {https://arxiv.org/abs/2010.12461}
 }
 ```
 
