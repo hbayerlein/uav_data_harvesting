@@ -34,7 +34,8 @@
                 "color": "blue"
             }
         },
-        "multi_agent": true
+        "multi_agent": true,
+        "fixed_starting_idcs": false
     },
 
     "reward_params": {
@@ -65,7 +66,9 @@
         "use_global_local": true,
         "global_map_scaling": 5,
         "local_map_size": 17,
-        "print_summary": true
+        "print_summary": true,
+        "use_scalar_input": false,
+        "blind_agent": false
     },
     "physics_params": {
         "channel_params": {

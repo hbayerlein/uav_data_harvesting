@@ -70,7 +70,7 @@ class BaseDisplay:
         plt.yticks(tick_labels_y)
         plt.axis([0, area_x_max, area_y_max, 0])
         ax.imshow(grid_image.astype(float), extent=[0, area_x_max, area_y_max, 0])
-        plt.axis('off')
+        # plt.axis('off')
 
         obst = env_map.obstacles
         for i in range(area_x_max):

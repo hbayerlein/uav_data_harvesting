@@ -19,6 +19,7 @@ class DDQNTrainer:
         self.params = params
         self.replay_memory = ReplayMemory(size=params.rm_size)
         self.agent = agent
+        self.use_scalar_input = self.agent.params.use_scalar_input
 
         if self.params.load_model != "":
             print("Loading model", self.params.load_model, "for agent")
@@ -27,15 +28,26 @@ class DDQNTrainer:
         self.prefill_bar = None
 
     def add_experience(self, state, action, reward, next_state):
-        self.replay_memory.store((state.get_boolean_map(),
-                                  state.get_float_map(),
-                                  state.get_scalars(),
-                                  action,
-                                  reward,
-                                  next_state.get_boolean_map(),
-                                  next_state.get_float_map(),
-                                  next_state.get_scalars(),
-                                  next_state.terminal))
+        if self.use_scalar_input:
+            self.replay_memory.store((state.get_device_scalars(self.agent.params.max_devices, self.agent.params.relative_scalars),
+                                      state.get_uav_scalars(self.agent.params.max_uavs, self.agent.params.relative_scalars),
+                                      state.get_scalars(give_position=True),
+                                      action,
+                                      reward,
+                                      next_state.get_device_scalars(self.agent.params.max_devices, self.agent.params.relative_scalars),
+                                      next_state.get_uav_scalars(self.agent.params.max_uavs, self.agent.params.relative_scalars),
+                                      next_state.get_scalars(give_position=True),
+                                      next_state.terminal))
+        else:
+            self.replay_memory.store((state.get_boolean_map(),
+                                      state.get_float_map(),
+                                      state.get_scalars(),
+                                      action,
+                                      reward,
+                                      next_state.get_boolean_map(),
+                                      next_state.get_float_map(),
+                                      next_state.get_scalars(),
+                                      next_state.terminal))
 
     def train_agent(self):
         if self.params.batch_size > self.replay_memory.get_size():

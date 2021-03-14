@@ -1,7 +1,6 @@
 import numpy as np
 
 from src.DeviceManager import DeviceManagerParams, DeviceManager
-import src.Map.Map as Map
 from src.State import State
 from src.base.BaseGrid import BaseGrid, BaseGridParams
 
@@ -12,6 +11,8 @@ class GridParams(BaseGridParams):
         self.num_agents_range = [1, 3]
         self.device_manager = DeviceManagerParams()
         self.multi_agent = False
+        self.fixed_starting_idcs = False
+        self.starting_idcs = [1, 2, 3]
 
 
 class Grid(BaseGrid):
@@ -58,8 +59,11 @@ class Grid(BaseGrid):
         state = State(self.map_image, self.num_agents, self.params.multi_agent)
         state.reset_devices(self.device_list)
 
-        # Replace False insures that starting positions of the agents are different
-        idx = np.random.choice(len(self.starting_vector), size=self.num_agents, replace=False)
+        if self.params.fixed_starting_idcs:
+            idx = self.params.starting_idcs
+        else:
+            # Replace False insures that starting positions of the agents are different
+            idx = np.random.choice(len(self.starting_vector), size=self.num_agents, replace=False)
         state.positions = [self.starting_vector[i] for i in idx]
 
         state.movement_budgets = np.random.randint(low=self.params.movement_range[0],

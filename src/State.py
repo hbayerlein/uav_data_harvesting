@@ -81,14 +81,17 @@ class State(BaseState):
     def get_total_data(self):
         return self.initial_total_data
 
-    def get_scalars(self):
+    def get_scalars(self, give_position=False):
         """
         Return the scalars without position, as it is treated individually
         """
+        if give_position:
+            return np.array([self.movement_budget, self.position[0], self.position[1]])
+
         return np.array([self.movement_budget])
 
-    def get_num_scalars(self):
-        return len(self.get_scalars())
+    def get_num_scalars(self, give_position=False):
+        return len(self.get_scalars(give_position))
 
     def get_boolean_map(self):
         padded_red = pad_centered(self, np.concatenate([np.expand_dims(self.no_fly_zone, -1),
@@ -161,3 +164,37 @@ class State(BaseState):
         for agent in range(self.num_agents):
             agent_map[self.positions[agent][1], self.positions[agent][0]][0] = self.movement_budgets[agent]
         return agent_map
+
+    def get_device_scalars(self, max_num_devices, relative):
+        devices = np.zeros(3 * max_num_devices, dtype=np.float32)
+        if relative:
+            for k, dev in enumerate(self.device_list.devices):
+                devices[k * 3] = dev.position[0] - self.position[0]
+                devices[k * 3 + 1] = dev.position[1] - self.position[1]
+                devices[k * 3 + 2] = dev.data - dev.collected_data
+        else:
+            for k, dev in enumerate(self.device_list.devices):
+                devices[k * 3] = dev.position[0]
+                devices[k * 3 + 1] = dev.position[1]
+                devices[k * 3 + 2] = dev.data - dev.collected_data
+        return devices
+
+    def get_uav_scalars(self, max_num_uavs, relative):
+        uavs = np.zeros(4 * max_num_uavs, dtype=np.float32)
+        if relative:
+            for k in range(max_num_uavs):
+                if k >= self.num_agents:
+                    break
+                uavs[k * 4] = self.positions[k][0] - self.position[0]
+                uavs[k * 4 + 1] = self.positions[k][1] - self.position[1]
+                uavs[k * 4 + 2] = self.movement_budgets[k]
+                uavs[k * 4 + 3] = not self.terminals[k]
+        else:
+            for k in range(max_num_uavs):
+                if k >= self.num_agents:
+                    break
+                uavs[k * 4] = self.positions[k][0]
+                uavs[k * 4 + 1] = self.positions[k][1]
+                uavs[k * 4 + 2] = self.movement_budgets[k]
+                uavs[k * 4 + 3] = not self.terminals[k]
+        return uavs

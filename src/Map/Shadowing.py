@@ -5,6 +5,8 @@ from src.Map.Map import load_map
 
 
 def bresenham(x0, y0, x1, y1, obstacles, shadow_map):
+    if obstacles[y0, x0]:
+        return
     x_dist = abs(x0 - x1)
     y_dist = -abs(y0 - y1)
     x_step = 1 if x1 > x0 else -1

@@ -6,6 +6,7 @@
         "training_images": false
     },
     "grid_params": {
+        "fixed_starting_idcs": false,
         "movement_range": [
             50,
             150
@@ -62,10 +63,12 @@
         "alpha": 0.005,
         "gamma": 0.95,
         "soft_max_scaling": 0.1,
-        "use_global_local": true,
         "global_map_scaling": 3,
         "local_map_size": 17,
-        "print_summary": true
+        "print_summary": true,
+        "use_scalar_input": false,
+        "blind_agent": false
+
     },
     "physics_params": {
         "channel_params": {
