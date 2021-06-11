@@ -82,9 +82,9 @@ If using this code for research purposes, please cite:
         title = {Multi-{UAV} Path Planning for Wireless Data Harvesting with Deep Reinforcement Learning},
         journal = {IEEE Open Journal of the Communications Society},
         year = {2021},
-  		volume = {2},
-		pages = {1171-1187},
-  		doi = {10.1109/OJCOMS.2021.3081996}
+        volume = {2},
+        pages = {1171-1187},
+        doi = {10.1109/OJCOMS.2021.3081996}
 }
 ```
 
