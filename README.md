@@ -42,7 +42,13 @@ python main.py --gpu --config config/manhattan32.json --id manhattan32
 --generate_config           Enable only to write default config from default values in the code
 ```
 
-Evaluate a model through Monte Carlo analysis over the random parameter space for the performance indicators 'Successful Landing', 'Collection Ratio', 'Collection Ratio and Landed' as defined in the paper (plus 'Boundary Counter' counting safety controller activations), e.g. for 1000 Monte Carlo iterations:
+For keeping track of the training, use TensorBoard. Various performance and training metrics, as well as intermittent test plots of trajectories, are recorded in log files and automatically saved in the 'logs' directory. On the command line, run:
+
+```
+tensorboard --logdir logs
+```
+
+Evaluate a model (saved during training in the 'models' directory) through Monte Carlo analysis over the random parameter space for the performance indicators 'Successful Landing', 'Collection Ratio', 'Collection Ratio and Landed' as defined in the paper (plus 'Boundary Counter' counting safety controller activations), e.g. for 1000 Monte Carlo iterations:
 
 ```
 python main_mc.py --weights models/manhattan32_best --config config/manhattan32.json --id manhattan32_mc --samples 1000
@@ -62,8 +68,9 @@ python main_mc.py --weights models/manhattan32_best --config config/manhattan32.
 The city environments from the paper 'manhattan32' and 'urban50' are included in the 'res' directory. Map information is formatted as PNG files with one pixel representing on grid world cell. The pixel color determines the type of cell according to
 
 * red #ff0000 no-fly zone (NFZ)
+* green #00ff00 buildings blocking wireless links (UAVs can fly over)
 * blue #0000ff start and landing zone
-* yellow #ffff00 buildings blocking wireless links (also obstacles for flying)
+* yellow #ffff00 buildings blocking wireless links + NFZ (UAVs can not fly over)
 
 If you would like to create a new map, you can use any tool to design a PNG with the same pixel dimensions as the desired map and the above color codes.
 
