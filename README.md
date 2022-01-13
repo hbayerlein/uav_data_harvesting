@@ -13,6 +13,8 @@ This repository contains an implementation of the double deep Q-learning (DDQN) 
 
 An earlier single-UAV conference version "UAV Path Planning for Wireless Data Harvesting: A Deep Reinforcement Learning Approach" was presented at IEEE Globecom 2020.
 
+An additional code repository is available with a joint DDQN trajectory design solution for the problems of data harvesting and coverage path planning (single-UAV): ["uavSim"](https://github.com/theilem/uavSim).
+
 For questions, please contact [Harald Bayerlein](https://hbay.gitlab.io) via email harald.bayerlein@eurecom.fr. Please also note that due to github's new naming convention, the 'master' branch is now called 'main' branch.
 
 
@@ -27,6 +29,8 @@ matplotlib==3.3.0 or newer
 scikit-image==0.16.2 or newer
 tqdm==4.45.0 or newer
 ```
+
+Developed and tested only on Linux-based systems. In principle, it should also run on Windows, but there might be some compatibility issues.
 
 
 ## How to use
@@ -48,7 +52,7 @@ For keeping track of the training, use TensorBoard. Various performance and trai
 tensorboard --logdir logs
 ```
 
-Evaluate a model (saved during training in the 'models' directory) through Monte Carlo analysis over the random parameter space for the performance indicators 'Successful Landing', 'Collection Ratio', 'Collection Ratio and Landed' as defined in the paper (plus 'Boundary Counter' counting safety controller activations), e.g. for 1000 Monte Carlo iterations:
+After training, evaluate a model (saved during training in the 'models' directory) through Monte Carlo analysis over the random parameter space for the performance indicators 'Successful Landing', 'Collection Ratio', 'Collection Ratio and Landed' as defined in the paper (plus 'Boundary Counter' counting safety controller activations), e.g. for 1000 Monte Carlo iterations:
 
 ```
 python main_mc.py --weights models/manhattan32_best --config config/manhattan32.json --id manhattan32_mc --samples 1000
@@ -65,7 +69,7 @@ python main_mc.py --weights models/manhattan32_best --config config/manhattan32.
 
 ## Resources
 
-The city environments from the paper 'manhattan32' and 'urban50' are included in the 'res' directory. Map information is formatted as PNG files with one pixel representing on grid world cell. The pixel color determines the type of cell according to
+The city environments from the paper called 'manhattan32' and 'urban50' are included in the 'res' directory. Map information is formatted as PNG files with one pixel representing on grid world cell. The pixel color determines the type of cell according to
 
 * red #ff0000 no-fly zone (NFZ)
 * green #00ff00 buildings blocking wireless links (UAVs can fly over)
